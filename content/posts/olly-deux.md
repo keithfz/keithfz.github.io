@@ -1,8 +1,8 @@
 +++
 title = "Olly deux"
-date = "2025-07-09"
+date = "2025-07-25"
 author = "keithfz"
-description = "ClickHose and Kafka on K8s for observability 2.0"
+description = "ClickHouse and Kafka on K8s for observability 2.0"
 +++
 Charity Majors talks about observability 2.0. This refers to arbitrarily wide events that comprise all of your observability data points, rather than having seperate pillars such as metrics, logs, and traces.
 
