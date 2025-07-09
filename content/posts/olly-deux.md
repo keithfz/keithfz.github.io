@@ -1,9 +1,10 @@
 +++
-title = "Olly deux"
-date = "2025-07-25"
+title = "olly deux"
+date = "2025-07-09"
 author = "keithfz"
-description = "ClickHouse and Kafka on K8s for observability 2.0"
+description = "ClickHouse and Kafka on K8s for Observability 2.0"
 +++
+
 Charity Majors talks about observability 2.0. This refers to arbitrarily wide events that comprise all of your observability data points, rather than having seperate pillars such as metrics, logs, and traces.
 
 I come from the Grafana stack, having run most of their products for monitoring some of my applications -- Loki for logs, Tempo for traces, Mimir for metrics, and surfaced via the Grafana UI. It's all backed by object storage, so it's been pretty cost-effective. Sure, sometimes things like text queries can be slow, you have to worry about things like cardinality -- but it's easy to spin up on Kubernetes, realatively a good performance vs cost tradeoff, and it offers all of the features I need.
