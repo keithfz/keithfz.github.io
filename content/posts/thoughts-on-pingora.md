@@ -5,15 +5,15 @@ author = "keithfz"
 description = "Or is Envoy the jenkins of cloud-native networking"
 +++
 
-# Envoy is Aging
+# Envoy is middle-aged 
 
-I will preface this by saying that I LOVE ENVOY PROXY. It is truly a revolutionary design that I use as an engineer, and consumer of the interent, daily.
+I will preface this by saying that I love Envoy. It is truly a revolutionary design that I use as an engineer, and consumer of the interent, daily.
 
 However, Envoy Proxy was initially developed in 2015. Kubernetes had just had it's first commit the year prior in June 2014. Rust 1.0 was release in 2015 as well. What's the point? Idk but it feels like the landscape is different now than it was in 2015. I know that's kind of obvious and a silly statement to make. Matt Klein said it himself, "Would I choose C++ today? No. However, today is not early 2015, eons ago in the technology world."
 
 Sometimes, Envoy's age shows up. C++ wouldn't have been the first choice today. A fresh build without a Bazel cache takes an eternity. But most annoying of all, it's configurations are cumbersome. We're abstracted away from most of it nowadays, with Envoy Gateway or Istio being used as a control plane for fleets of envoy proxies. But for example, here is what the official documentation describes as "a minimal fully static bootstrap config":
 
-```
+```yaml
 admin:
   address:
     socket_address: { address: 127.0.0.1, port_value: 9901 }
