@@ -7,7 +7,7 @@ description = "Doing Kustomize the Terraform way?"
 
 I prefer Kustomize over Helm for a few reasons. For starters, it makes it much easier to manage a large number of environments by having some shared base, and the mental model of different layers is easy for me to understand coming from things like [Yocto](https://docs.yoctoproject.org/overview-manual/yp-intro.html#the-yocto-project-layer-model) (truly a nightmare). I won't even get into the YAML templating aspects of Helm, since that's already been [discussed to death](https://ruudvanasseldonk.com/2023/01/11/the-yaml-document-from-hell#templating-yaml-is-a-terrible-terrible-idea). But Kustomize isn't fool-proof either. I have yet to find a widely adopted, easy to use tool for wrangling YAML that doesn't have a ton of foot-guns. Jsonnet looks interesting, especially something like with Grafana Tanka, but it frankly just doesn't have the same weight as Helm or Kustomize at the moment.
 
-For Kustomize, you have to be careful your base layers don't move out from under you. You might have a change you think is safe, but it's being pulled in somewhere as a remote base, or it's a component that impacts the wrong environment. Most annoyingly of all is a change that breaks `kustomize build` so ArgoCD just errors out and never applies any updates at all until you fix your bad YAML. Ultimately, you could think a change doesn't impact something else, but how can you be sure? 
+For Kustomize, you have to be careful your base layers don't move out from under you. You might have a change you think is safe, but it's being pulled in somewhere as a remote base, or it's a component that impacts the wrong environment. Most annoyingly of all is a change that breaks `kustomize build` so ArgoCD just bricks and never applies any updates at all until you fix your bad YAML. Ultimately, you could think a change doesn't impact something else, but how can you be sure? 
 
 I think the [rendered manifests pattern](https://akuity.io/blog/the-rendered-manifests-pattern) does a very good job of dealing with this very same problem. It removes the abstraction, so what you see is what you get when it comes time to look at the change you're deploying via GitOps. Unfortunately, there are times where I've been working in environments that weren't easily compatible with this pattern. I wanted a quick and dirty tool to spot check deltas between branches. So inspired by `terraform plan`, I spent a couple of hours throwing together `kustomize-plan`.
 
@@ -182,6 +182,6 @@ TOTAL
 1 manifests to create, 1 manifests to delete, 2 manifests to update.
 ```
 
-So this attempts to capture any create, update, or delete operations that would occur if that PR were to get merged in.
+So this attempts to capture any create, update, or delete operations that would occur if that PR were to get merged in. It's not a guarantee of safety. For example, what if there are weird side effects from mutating webhooks? It also doesn't perform any manifest validations like a [kubeconform](https://github.com/yannh/kubeconform). But for me it's a good tool to sanity check when I'm trying to do some additional validations before opening a PR.
 
 Can try it out here: https://github.com/keithfz/kustomize-plan
